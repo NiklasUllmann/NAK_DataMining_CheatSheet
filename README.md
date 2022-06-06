@@ -1,4 +1,4 @@
-# Statistik Cheat Sheet - Nordakademie DataScience
+# DataMining Cheat Sheet - Nordakademie DataScience
 
 - Dozent Uwe Neuhaus
 - Nordakademie

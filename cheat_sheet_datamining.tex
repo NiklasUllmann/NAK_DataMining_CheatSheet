@@ -235,7 +235,7 @@
             \item Mehrfach Split
         \end{itemize}
         Möglichkeiten der Diskretisierung
-        \begin{itemize}
+        \begin{itemize}[noitemsep,nolistsep]
             \item Einteilung in gleichbelegte Bereiche (Percentile)
             \item Einteilung in gleiche Bereiche (Clustering)
             \item Binäre Entscheidung: (A < v) und (A >= v)
@@ -270,13 +270,34 @@
         \begin{itemize}[noitemsep,nolistsep]
             \item Können mit allen 3 Maßen berechnet werden.
             \item Split
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ split = \sum_{i = 1}^{k} \dfrac{n_i}{n} * Knotenunreinheit$
+                        \item $n_i$ = Anzahl der Daten im Kindknoten i
+                        \item $n$ = Anzahl der Daten im Elternknoten
+                    \end{itemize}
             \item Gain
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ gain = P - M$
+                        \item $P$ = Knotenunreinheit des Elternknoten
+                        \item $M$ = Split der Kindknoten
+                        \item Gain maximieren für einen guten Split bzw. M minimieren!!!
+                    \end{itemize}
+            \item \textcolor{red}{Problem: Splits mit vielen Kindsknoten mit wenigen aber einen Datensätze werden bevorzugt!}
             \item SplitInfo
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ splitInfo = \sum_{i = 1}^{k} \dfrac{n_i}{n} log_2 \dfrac{n_i}{n}$
+                        \item $splitInfo$ = Entropie der Partitionierung
+                    \end{itemize}
             \item GainRatio
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ gainRatio = \dfrac{gain_{split}}{splitInfo}$
+                        \item Korrigierter Gain um Entropie -> Bestrafung hoher Anzahl kleiner Partitionen
+                        \item Maximum (Best Case)
+                    \end{itemize}
         \end{itemize}
 
         \subsection{Bewertung Bäume, Overfitting etc.}
-
+        
         \subsection{Modell Evaluation}
 
     \section{Clustering}

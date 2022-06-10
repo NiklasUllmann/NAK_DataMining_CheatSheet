@@ -45,7 +45,7 @@
     \begin{multicols}{3}
         
     \section{Grundlagen}
-        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+        \begin{itemize}[noitemsep,nolistsep]
             \item Qualitative Attribute: 
                 \begin{itemize}
                     \item Variieren nach Beschaffenheit
@@ -55,7 +55,7 @@
                     \item Variieren nach Wert/Zahlen
                 \end{itemize}
         \end{itemize}
-        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+        \begin{itemize}[noitemsep,nolistsep]
             \item Diskrete Attribute: 
                 \begin{itemize}
                     \item abgestufte Werte
@@ -66,7 +66,7 @@
                 \end{itemize}
         \end{itemize}
             \subsection{Skalenniveaus}
-            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \begin{itemize}[noitemsep,nolistsep]
                 \item Nominal
                 \begin{itemize}
                     \item nur Gleichheit oder Andersartigkeit feststellbar (keine Bewertung)
@@ -85,15 +85,16 @@
                 \end{itemize}
             \end{itemize}
     \subsection{Sym. vs asym. Attribute}
-        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+        \begin{itemize}[noitemsep,nolistsep]
             \item Das symmetrische binäre Attribut ist ein Attribut, bei dem jeder Wert gleichwertig ist (w/m)
             \item Asymmetrisch ist ein Attribut, bei dem die beiden Ausprägungen nicht gleichwertig sind (Testergebnisse oder Vergleich von Umfragen)
         \end{itemize}
-    - Rauschen Artefakte, Ausreißer
+        
+    \subsection{Rauschen Artefakte, Ausreißer}
 
     \subsection{Datenvorverarbeitung}
 
-    \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+    \begin{itemize}[noitemsep,nolistsep]
         \item Aggregation
         \item Sampling
         \item Diskretisierung / Binarisierung
@@ -107,30 +108,52 @@
             \subsubsection{Ähnlichkeit}
 
             Eigenschaften:
-            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \begin{itemize}[noitemsep,nolistsep]
                 \item $s(x,y) 0 <= s <= 1$
                 \item $s(x,y) = 0$, wenn $x = y$
                 \item Symmetry: $s(x,y) = s(y,x)$
             \end{itemize}
 
             Simple Matching Coefficient (SMC):
-            \begin{itemize}
+            \begin{itemize}[noitemsep,nolistsep]
                 \item $ SMC = \dfrac{f_{00}+f_{11}}{f_{01}+ f_{10}+ f_{00}+ f_{11}} $
+                \item Binäre Daten
+                \item gut für \textbf{sym. Attribute}, da Vorhandensein und Abwesenheit gleich gewertet wird
             \end{itemize}
 
             Jaccard Coefficient:
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $ J = \dfrac{f_{11}}{f_{01}+ f_{10}+ f_{11}} $
+                \item Binäre Daten
+                \item gut für \textbf{asym. Attribute}, da Vorhandensein gewertet wird
+            \end{itemize}
 
             Extended Jaccard Coefficient (Tanimoto)
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $EJ: \dfrac{\langle x, y \rangle}{||x||^2 + ||y||^2 - \langle x,y \rangle}$
+                \item Jaccard für alle Daten
+            \end{itemize}
 
             Cosine Similarity:
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $cos(x,y) =  \dfrac{\langle x, y \rangle}{||x|| * ||y||}$
+                \item $ -1 <= cos(x,y) <= 1$
+                \item 1 = sehr ähnlich, 0 = Vekrtor im 90° Winkel, -1 = Vektor im 180° Winkel
+                \item Umrechnung von zahl zu Winkel im Taschenrechner mit $cos^{-1}$
+                \item auch für asym. Attribute da 0-0 Paare rausfallen
+            \end{itemize}
 
             Correlation:
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $corr(x,y)$ über Taschenrechner
+                \item zeigt linearen Zusammenhang
+            \end{itemize}
 
 
             \subsubsection{Distanz (Minkowski)}
 
             Eigenschaften:
-            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \begin{itemize}[noitemsep,nolistsep]
                 \item Positivity (d(x,y) >= 0, d(x,y) = 0, wenn x = y)
                 \item Symmetry (d(x,y)= d(y,x))
                 \item Triangle Inequality (d(x,z) <= d(x,y) + d(y,z))
@@ -165,7 +188,7 @@
             \end{center}
         
             Mutual Information:
-            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \begin{itemize}[noitemsep,nolistsep]
                 \item Ähnlich wie Correlation, aber für nicht linearen Zusammenhang
                 \item $0 =$ kein Zusammenhang, $1 =$ starker Zusammenhang
             \end{itemize}

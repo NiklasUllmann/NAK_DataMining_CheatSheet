@@ -89,18 +89,23 @@
             \item Das symmetrische binäre Attribut ist ein Attribut, bei dem jeder Wert gleichwertig ist (w/m)
             \item Asymmetrisch ist ein Attribut, bei dem die beiden Ausprägungen nicht gleichwertig sind (Testergebnisse oder Vergleich von Umfragen)
         \end{itemize}
-        
+
     \subsection{Rauschen Artefakte, Ausreißer}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Rauschen (Random Verzerrung der Messung durch Einflussfaktoren)
+        \item Artefakte (Unvollständige Messwerte)
+        \item Ausreißer (Messwerte, die nicht im Normalbereich liegen)
+    \end{itemize}
 
     \subsection{Datenvorverarbeitung}
 
     \begin{itemize}[noitemsep,nolistsep]
-        \item Aggregation
+        \item Aggregation (Zusammenfassung mehrerer Messwerte, Details gehen verloren)
         \item Sampling
         \item Diskretisierung / Binarisierung
         \item Transformation
         \item Dimensionsreduktion
-        \item Feature Subset Selection
+        \item Feature Subset Selection (Konzentration auf wichtige Features)
         \item Feature Creation
     \end{itemize}
 
@@ -114,27 +119,27 @@
                 \item Symmetry: $s(x,y) = s(y,x)$
             \end{itemize}
 
-            Simple Matching Coefficient (SMC):
+            \textbf{Simple Matching Coefficient (SMC):}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $ SMC = \dfrac{f_{00}+f_{11}}{f_{01}+ f_{10}+ f_{00}+ f_{11}} $
                 \item Binäre Daten
                 \item gut für \textbf{sym. Attribute}, da Vorhandensein und Abwesenheit gleich gewertet wird
             \end{itemize}
 
-            Jaccard Coefficient:
+            \textbf{Jaccard Coefficient:}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $ J = \dfrac{f_{11}}{f_{01}+ f_{10}+ f_{11}} $
                 \item Binäre Daten
                 \item gut für \textbf{asym. Attribute}, da Vorhandensein gewertet wird
             \end{itemize}
 
-            Extended Jaccard Coefficient (Tanimoto)
+            \textbf{Extended Jaccard Coefficient (Tanimoto):}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $EJ: \dfrac{\langle x, y \rangle}{||x||^2 + ||y||^2 - \langle x,y \rangle}$
                 \item Jaccard für alle Daten
             \end{itemize}
 
-            Cosine Similarity:
+            \textbf{Cosine Similarity:}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $cos(x,y) =  \dfrac{\langle x, y \rangle}{||x|| * ||y||}$
                 \item $ -1 <= cos(x,y) <= 1$
@@ -143,7 +148,7 @@
                 \item auch für asym. Attribute da 0-0 Paare rausfallen
             \end{itemize}
 
-            Correlation:
+            \textbf{Correlation:}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $corr(x,y)$ über Taschenrechner
                 \item zeigt linearen Zusammenhang
@@ -173,31 +178,106 @@
                 \end{tabular}
             \end{center}
 
-            \
-
             \subsubsection{Weiteres}
 
-            Verhalten für Multiplikation und Addition:
+            \textbf{Verhalten für Multiplikation und Addition:}
             \begin{center}
             \begin{tabular}{|l|l|l|l|}
                 \hline
-                Property                              & Cosine & Correlation & Minkowski \\ \hline
+                Property                    & Cosine & Correlation & Minkowski \\ \hline
                 Invariant to multiplication & Yes    & Yes         & No        \\ \hline
                 Invariant to addition   & No     & Yes         & No        \\ \hline
                 \end{tabular}
             \end{center}
         
-            Mutual Information:
+            \textbf{Mutual Information:}
             \begin{itemize}[noitemsep,nolistsep]
                 \item Ähnlich wie Correlation, aber für nicht linearen Zusammenhang
                 \item $0 =$ kein Zusammenhang, $1 =$ starker Zusammenhang
+                \item \textcolor{red}{HIER fehlts}
             \end{itemize}
             
-            Umrechnung Ähnlichkeit $<->$ Distanz
+            \textbf{Umrechnung Ähnlichkeit $<->$ Distanz:}\\
+            Bspw:
+            \begin{itemize}[noitemsep,nolistsep]
+                \item $s = \dfrac{1}{d}-1$
+                \item $s = ln(x)*-1$
+                \item $d = 1 - s$
+                \item $d = \sqrt[2]{1-s}$
+            \end{itemize}
 
     \section{Klassifikation}
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Zuordnung einer abhängigen Variable (y) anhand von unanhängigen Variablen
+                \item Model hat beim Training (Induction) gelernt zuzuordnen
+                \item Model wendet das gelernte bei der Klassifikation an (Deduction)
+            \end{itemize}
+        \subsection{Beispiele von Klassifikationsverfahren}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Elementare Verfahren (Decision Trees, KNN, Naive Bays, SVM, NN)
+            \item Ensemble Verfahren (Random Forests, bagging, Boosting, \dots)
+        \end{itemize}
+        \subsection{Entscheidungsbäume}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Datensatz durchläuft von der Wurzel bis zum Blatt die Knoten und wird anhand der Entscheidungen am Knoten klassifiziert
+            \item Hunts Algo entscheidet, wie Splits gesetzt werden (gibt noch mehr)
+        \end{itemize}
+        \subsubsection{Hunts Algo}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Sei $D_t$ die Menge der Trainingsdatensätze, die Knoten t erreichen
+            \item Wenn $D_t$ nur Datensätze enthält, die zur selben Klasse ytgehören, dann ist t ein Blatt des Baumes und wird mit ytgekennzeichnet.
+            \item Falls $D_t$ Datensätze enthält, die zu mehr als einer Klasse gehören, verwende eine Attribut-Testbedingung, um die Daten in kleinere Untermengen aufzuteilen
+        \end{itemize}
 
-    
+        \subsubsection{Split bei Attributen}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Binärer Split
+            \item Mehrfach Split
+        \end{itemize}
+        Möglichkeiten der Diskretisierung
+        \begin{itemize}
+            \item Einteilung in gleichbelegte Bereiche (Percentile)
+            \item Einteilung in gleiche Bereiche (Clustering)
+            \item Binäre Entscheidung: (A < v) und (A >= v)
+        \end{itemize}
+        \textbf{Greedy Ansatz}
+        Algorithmus der schrittweise den besten nächsten Schritt mit dem höchsten gewinn wählt.
+
+        \subsection{Maß für Knotenunreinheit}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item $p_i(t)$ Häufigkeit von klasse i beim Knoten t\\ $c$ Gesamtzahl der Klassen
+            \item \textbf{Gini Index}
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ GI = 1 - \sum_{i=0}^{c-1} p_i(t)^2$
+                        \item Maximum: $1-\dfrac{1}{c}$
+                        \item Minimum: 0 (Best Case)
+                    \end{itemize}
+            \item \textbf{Entropy}
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ E = - \sum_{i=0}^{c-1} p_i(t) * log_2 p_i(t)$
+                        \item Maximum: $log_2 c$
+                        \item Minimum: 0 (Best Case)
+                    \end{itemize}
+            \item \textbf{Klassifikationsfehler}
+                    \begin{itemize}[noitemsep,nolistsep]
+                        \item $ CE = 1 - max[p_i(t)]$
+                        \item Maximum: Wenn alle Datensätze auf die Klassen gleich verteilt sind 
+                        \item Minimum: 0 (Best Case, wenn alle datensätze zu einer Klasse gehören)
+                    \end{itemize}
+        \end{itemize}
+
+        \subsection{Nachfolgende Berechnungen}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Können mit allen 3 Maßen berechnet werden.
+            \item Split
+            \item Gain
+            \item SplitInfo
+            \item GainRatio
+        \end{itemize}
+
+        \subsection{Bewertung Bäume, Overfitting etc.}
+
+        \subsection{Modell Evaluation}
 
     \section{Clustering}
     

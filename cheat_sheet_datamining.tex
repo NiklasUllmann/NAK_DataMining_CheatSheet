@@ -14,6 +14,8 @@
 \usepackage{fourier} 
 \usepackage{array}
 \usepackage{makecell}
+\usepackage{amsmath}
+
 
 \renewcommand\theadalign{bc}
 \renewcommand\theadfont{\bfseries}
@@ -82,20 +84,93 @@
                     \item intervallskaliert (Kein Nullpunkt, nur Differenzen)
                 \end{itemize}
             \end{itemize}
-    \subsection{asym. Attribute}
-
+    \subsection{Sym. vs asym. Attribute}
+        \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+            \item Das symmetrische binäre Attribut ist ein Attribut, bei dem jeder Wert gleichwertig ist (w/m)
+            \item Asymmetrisch ist ein Attribut, bei dem die beiden Ausprägungen nicht gleichwertig sind (Testergebnisse oder Vergleich von Umfragen)
+        \end{itemize}
     - Rauschen Artefakte, Ausreißer
 
     \subsection{Datenvorverarbeitung}
 
+    \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+        \item Aggregation
+        \item Sampling
+        \item Diskretisierung / Binarisierung
+        \item Transformation
+        \item Dimensionsreduktion
+        \item Feature Subset Selection
+        \item Feature Creation
+    \end{itemize}
+
     \subsection{Ähnlichkeits- und Distanzmaße}
             \subsubsection{Ähnlichkeit}
 
-            \subsubsection{Distanz}
+            Eigenschaften:
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item $s(x,y) 0 <= s <= 1$
+                \item $s(x,y) = 0$, wenn $x = y$
+                \item Symmetry: $s(x,y) = s(y,x)$
+            \end{itemize}
 
+            Simple Matching Coefficient (SMC):
+            \begin{itemize}
+                \item $ SMC = \dfrac{f_{00}+f_{11}}{f_{01}+ f_{10}+ f_{00}+ f_{11}} $
+            \end{itemize}
+
+            Jaccard Coefficient:
+
+            Extended Jaccard Coefficient (Tanimoto)
+
+            Cosine Similarity:
+
+            Correlation:
+
+
+            \subsubsection{Distanz (Minkowski)}
+
+            Eigenschaften:
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Positivity (d(x,y) >= 0, d(x,y) = 0, wenn x = y)
+                \item Symmetry (d(x,y)= d(y,x))
+                \item Triangle Inequality (d(x,z) <= d(x,y) + d(y,z))
+            \end{itemize}
+            
+            $$ d(x,y) =  \sqrt[r]{\sum^{n}_{k=1} | x_k - y_k |^r} $$
+
+            \begin{center}
+                
+                \begin{tabular}{|l|l|l|}
+                \hline
+                Name      & r   & Anwendung                                                                                            \\ \hline
+                Hamming   & 1   & Bin.Vekt. \\ \hline
+                CityBlock & 1   &  nur gerade                                                                                                    \\ \hline
+                Euclid    & 2   &  schräg                                                                                                    \\ \hline
+                Supremum  & $\infty$ &  nur größte Dist.                                                                                                 \\ \hline
+                \end{tabular}
+            \end{center}
+
+            \
+
+            \subsubsection{Weiteres}
+
+            Verhalten für Multiplikation und Addition:
+            \begin{center}
+            \begin{tabular}{|l|l|l|l|}
+                \hline
+                Property                              & Cosine & Correlation & Minkowski \\ \hline
+                Invariant to multiplication & Yes    & Yes         & No        \\ \hline
+                Invariant to addition   & No     & Yes         & No        \\ \hline
+                \end{tabular}
+            \end{center}
         
-        - Mutual Information
-        - Ähnlichkeit <-> Distanz (Umrechnung)
+            Mutual Information:
+            \begin{itemize}[noitemsep,nolistsep,leftmargin=*]
+                \item Ähnlich wie Correlation, aber für nicht linearen Zusammenhang
+                \item $0 =$ kein Zusammenhang, $1 =$ starker Zusammenhang
+            \end{itemize}
+            
+            Umrechnung Ähnlichkeit $<->$ Distanz
 
     \section{Klassifikation}
 

@@ -317,9 +317,23 @@
             \item $k$ = Anzahl Blätter im Baum
             \item $N_{train}$ Anzahl Trainingsdatensätze
         \end{itemize}
+        
         \subsubsection{Pruning}
         \begin{itemize}[noitemsep,nolistsep]
             \item Pre-Pruning
+                \begin{itemize}[noitemsep,nolistsep]
+                    \item Stoppe im Prozess, wenn bspw.
+                    \item Datensätze zur selben Klasse gehören
+                    \item Alle Datensätze bei allen Attributen die selben Werte haben
+                    \item Anzahl der Datensätze Schwellenwert unterschreitet
+                    \item Klassenverteilung nach $\chi^2$ unabhängig ist
+                    \item Gain nicht hoch genug ist
+                \end{itemize}
+            \item Post-Pruning
+                \begin{itemize}[noitemsep,nolistsep]
+                    \item Nach Fertigstellung des Baumes
+                    \item bottum-up Ansatz
+                \end{itemize}
         \end{itemize}
 
         \subsection{Modell Evaluation}

@@ -297,15 +297,77 @@
         \end{itemize}
 
         \subsection{Bewertung Bäume, Overfitting etc.}
-        
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Trainingsfehler: Klassifikationsfehler von Daten aus Training
+            \item Testfehler:  Klassifikationsfehler von Daten aus Test
+            \item Generalisierungsfehler: Erwarteter K-Fehler bei random Daten
+        \end{itemize}
+        \subsubsection{Under-/Overfitting}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Undefitting: Modell ist zu simpel (Training- /Testfehler groß)
+            \item Overfitting: Modell ist zu komplex oder zu wenig Daten (Testfehler groß)
+            \item Typischer Ellenbogen - Im "Knick" ist das Optimum
+        \end{itemize}
+
+        \subsubsection{Fehlerabschätzung}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Ockhams Razor/Sparsamkeitsprinzip
+            \item pess. Fehlerabschätzung: $err_{gen}(T) = err(T) + \Omega * \dfrac{k}{N_{train}}$
+            \item $err(T)$ = Gesamtfehlermenge Training
+            \item $k$ = Anzahl Blätter im Baum
+            \item $N_{train}$ Anzahl Trainingsdatensätze
+        \end{itemize}
+        \subsubsection{Pruning}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Pre-Pruning
+        \end{itemize}
+
         \subsection{Modell Evaluation}
+        \subsubsection{Validierung}
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Holdout (Split zwischen Training- und Testdaten)
+            \item Kreuzvalidierung (Mehrfach Holdout mit disjunkten Mengen und Durchschnitt über )
+        \end{itemize}
+
+        \subsubsection{Konfusionmatrix}
+        Siehe Bild im Repo
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Precision (\% der richtig klassifizierten innerhalb der positiven Vorhersagen)
+            \item Recall/True Positive Rate (\% der richtig klassifizierten von den ursprünglich positiven)
+            \item False Positive Rate (\% der flasch positiv klassifizierten innerhalb der ursprünglich negativen)
+            \item Accuracy (\% der richtig klassifizierten Daten über allen)
+            \item F1-Score (Gewichtetes Maß zwischen Precision und Recall)
+        \end{itemize}
+
+        \subsubsection{ROC Kurve}
+        Siehe Bild im Repo
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Achsen:
+                \begin{itemize}[noitemsep,nolistsep]
+                    \item X: False Positive Rate
+                    \item Y: True Positive Rate
+                    \item (0,0): alle Prognosen negativ
+                    \item (1,1): alle Prognosen positiv 
+                    \item (1,0): Idealzustand, alle Prognosen korrekt
+                \end{itemize}
+            \item Diagonale (Ergebnis zufälligen Ratens)
+            \item Area under the Curve (AUC)
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Idealwert 1, Zufallsmodell 0.5
+            \end{itemize}
+            \item \textcolor{red}{Bester Split beim Punkt, der am nächsten an (1,0) liegt!}
+        \end{itemize}
 
     \section{Clustering}
     
     
     \end{multicols}
 
+
     \newpage
-    \section*{Übungsaufgaben und Musterlösungen}
+
+
+    \section{Übungsaufgaben und Musterlösungen}
 \end{landscape}
+
 \end{document}

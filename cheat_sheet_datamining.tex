@@ -373,8 +373,149 @@
         \end{itemize}
 
     \section{Clustering}
-    
-    
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Ordne Datenobjekt einem Cluster zu 
+        \item Objekt innerhalb des Clusters möglich ähnlich 
+        \item Objekte aus unterschiedlichen Clustern möglichst unterschiedlich
+        \item Exklusives Clustering (Daten dürfen nur einem C angehören) - nicht exklusives 
+        \item Probabilistisches Clustering (Datenpunkte gehören mit Wahrscheinlichkeit X zu Cluster. Alle Wahrscheinlichkeiten aufaddiert = 1)
+        \item Fuzzy Cluster (daten gehören anteilig zu Clustern)
+        \item Vollständiges Clustering (Alle Datenpunkte sind in einem C)
+        \item Partielles Clustering (Es gibt Daten ohne Cluster)
+    \end{itemize}
+
+    \subsection{Arten von Clustern}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Wahl-separierte Cluster
+            \begin{itemize}
+                \item Jeder Punkt eines Clusters liegt näher an jedem anderen Punkt des Clusters als an irgendeinem Punkt eines anderen Clusters
+            \end{itemize}
+        \item prototyp-basiert
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Jeder Punkt liegt näher am Prototypen des Clusters, als an einem anderen Prototypen
+                \item Zentroid: Durchschnitt aller Punkte (Schwerpunkt)
+                \item Mediod: mittlerer Punkt (Median)
+            \end{itemize}
+        \item kontiguitäts-basiert
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Jeder Punkt eines Clusters liegt näher an (ist ähnlicher zu) einem oder mehreren Punkten des Clusters als zu irgendeinem Punkt eines anderen Clusters
+            \end{itemize}
+        \item dichte-basiert
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Ein Cluster ist eine Region dichter Punkte, die durch Regionen mit geringer Punktdichtevon anderen Regionen mit hoher Punktdichte separiert ist
+            \item Einsatz bei \textbf{unregelmäßig geformten Clustern} \& \textbf{bei Datenrauschen oder Ausreißern}
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Partitionierendes Clustering (K-Means)}
+    \subsubsection{Eigenschaften:}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Vollständig partitionierend
+        \item prototyp-basiert (Zentroid)
+        \item Anzahl der Cluster muss vorgegeben werden
+        \item Speicherplatzkomplexität: $O((n+K)*d)$
+        \item Laufzeitkomplexität: $O(n*K*I*d)$
+        \item $n$= Anzahl der Punkte, $K$= Anzahl der Cluster, $I$= Anzahl der Iterationen, $d$=Anzahl der Attribute
+        \item Algo konvergiert recht schnell
+        \item Durch zufällig gewählte Zentroids unterschiedliche Ergebnisse
+        \item Häufig wird nur lokale und nicht globale Minimum gefunden!
+    \end{itemize}
+
+    \subsubsection{Algorithmus:}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Select k points as initial centroids
+        \item repeat
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Form k clusters by assigning all points to the closets centroid
+            \item recompute the centroid of each cluster
+        \end{itemize}
+        \item until centroids don't change
+    \end{itemize}
+
+    \subsubsection{Zielfunktion}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Sum of Squared Error (SSE)
+        \item Fehler: Abstand eines Datenpunkts zum nächstgelegenen Zentroid
+        \item $SSE = \sum_{i=1}^{k}\sum_{x \epsilon c_i} dist(m_i, x)^2$
+        \item Summe sinkt mit jeder Iteration bis lokales/globales Min erreicht ist
+    \end{itemize}
+
+    \subsubsection{Optimierung KMeans}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Mehrfach ausführen (Wahrscheinlichkeit schlecht)
+        \item Zentroid Wahl über Heuristik (Wahl nacheinander mit möglichst großem Abstand)
+        \item Bisecting (Erst zwei Cluster, dann weiter spalten)
+    \end{itemize}
+
+    \subsubsection{Grenzen und Probleme KMeans}
+    Schlecht bei:
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Cluster unterschiedlicher Größe 
+        \item Cluster unterschiedlicher Dichte 
+        \item Cluster nicht kugelförmig sind 
+        \item Cluster mit Ausreißer oder Rauschenhaben
+    \end{itemize}
+
+
+    \subsection{DBSCAN - dichte basiertes Clustering}
+
+    \subsubsection{Eigenschaften}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Keine Probleme mit unterschiedlichen Clustergrößen und -formen
+        \item Unempfindlich gegenüber Rauschen
+    \end{itemize}
+
+
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Kernpunkt
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Punkt, in derem $\epsilon$ Umgebung sich mindestsns $MinPts$ befinden
+                \item Kernpunkt wird mitgezählt
+            \end{itemize}
+        \item Randpunkt
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Nicht Kernpunkt
+                \item Aber in $\epsilon$ Distanz von kernpunkt entfernt ist
+            \end{itemize}
+        \item Rauschpunkt
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Weder Kern- noch Randpunkt
+            \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Algorithmus}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Kennzeiche alle Punkte als, kern, Rand und Rauschpunkt
+        \item Lösche Randpunkte
+        \item Verbinde alle Kernpunkte, die in $\epsilon$ Distanz liegen
+        \item Jede Gruppe von Kernpunkten wird ein Cluster
+        \item Jeder Randpunkt wird einem Cluster zugeordnet
+    \end{itemize}
+
+    \subsubsection{Parameter auswählen}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item $\epsilon$
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Plotte Abstände zu allen k Nachbarn
+                \item Randpunkte haben kurze Distanz, Rauschpunkte große 
+                \item Sobald Distanz sign. ansteigt, $\epsilon$ ablesen
+            \end{itemize}
+        \item $MinPts$
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Zu kleiner Wert führt zu Miniclustern
+                \item Wert erhöhen bis Anzahl der Cluster nicht mehr stark sinkt
+            \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Grenzen und Probleme DBSCAN}
+    Schlecht bei:
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Cluster unterschiedlicher Dichte
+        \item hochdimensionalen Daten
+    \end{itemize}
+
+
+    \subsection{Hierarchisches Clustering}
     \end{multicols}
 
 

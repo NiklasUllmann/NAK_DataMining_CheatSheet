@@ -366,10 +366,18 @@
                 \end{itemize}
             \item Diagonale (Ergebnis zufälligen Ratens)
             \item Area under the Curve (AUC)
-            \begin{itemize}[noitemsep,nolistsep]
-                \item Idealwert 1, Zufallsmodell 0.5
-            \end{itemize}
+                \begin{itemize}[noitemsep,nolistsep]
+                    \item Idealwert 1, Zufallsmodell 0.5
+                \end{itemize}
             \item \textcolor{red}{Bester Split beim Punkt, der am nächsten an (1,0) liegt!}
+            \item ROC visuell lösen:
+                \begin{itemize}[noitemsep,nolistsep]
+                    \item Oben rechts in Vis anfangen, links in der Tabelle
+                    \item Tabelle vorstellen, dass Grenze Schritt für Schritt nach rechts geschoben wird. (Links der Grenze Klasse A, rechts Klasse B)
+                    \item Wenn hinzukommender Eintrag richtig klassifiziert wird: Curve geht 1 Schritt nach links
+                    \item Wenn hinzukommender Eintrag falsch klassifiziert wird: Curve geht 1 Schritt nach unten
+                    \item Schrittgröße = $\dfrac{1}{Anzahl Einträge}$
+                \end{itemize}
         \end{itemize}
 
     \section{Clustering}
@@ -516,12 +524,62 @@
 
 
     \subsection{Hierarchisches Clustering}
+
+    \subsubsection{Eigenschaften}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Erzeugt Menge von verschachtelten Clustern
+        \item Baumdiagramm der Cluster als Dendogram darstellbar
+        \item Keine Angabe von Clusteranzahl nötig! (Anzahl kann sich nach Erstellung beliebig ausgesucht werden)
+        \item Agglomeratives Clustern (verschmelzent)
+        \item Divisives Clustern (teilend)
+        \item Verwenden beide Ähnlichkeits- oder Distanzmaße (Greedy Ansatz)
+        \item Speicherplatzkomplexität: $O(n^2)$
+        \item Zeitkomplexität: $O(n^3)$
+    \end{itemize}
+
+    \subsubsection{Algo agglomeratives Clustering}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Abstandsmatrix berechnen 
+        \item repeat
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Merge 2 dichteste Cluster 
+            \item Update Abstandsmatrix
+        \end{itemize}
+        \item until, 1 Cluster übrig bleibt
+    \end{itemize}
+
+    \subsubsection{Inter-Cluster Abstand}
+    \begin{itemize}[noitemsep,nolistsep]
+        \item Minimaler Abstand (Single Link)
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Wähle immer das Minimum der kleinsten Abstände aus
+            \item Kein Problem mit nicht eliptischen Clustern!
+            \item Probleme mit verrauschten Daten und Ausreißern
+        \end{itemize}
+        \item Maximaler Abstand (Complete Link)
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Wähle immer das Minimum der maximalsten Abstände aus
+            \item Kaum/Keine Probleme mit verrauschten Daten und Ausreißern
+            \item Bevorzugt kugelförmige Cluster
+            \item Trennt große Cluster häufiger auf
+        \end{itemize}
+        \item Durchschnittlicher Abstand (Average Link)
+        \begin{itemize}[noitemsep,nolistsep]
+            \item Der Abstand zweier Cluster entspricht dem Durchschnitt der Abstände aller Punktpaareaus den verschiedenen Clustern
+            \item Wähle immer das Minimum der durchschnittlichen Abstände
+            \item KOmpromiss zwischen Min und Max Distanz
+            \item Stärke (Weniger anfällig für Rauschen, Trennt große Cluster weniger häufiger)
+            \item Schwäche (Bevorzugt kugelförmige Cluster, Berechnung aufwändig)
+        \end{itemize}
+    \end{itemize}
+
+
+    
+
+
+
     \end{multicols}
-
-
     \newpage
-
-
     \section{Übungsaufgaben und Musterlösungen}
 \end{landscape}
 

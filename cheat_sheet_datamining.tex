@@ -101,12 +101,12 @@
 
     \begin{itemize}[noitemsep,nolistsep]
         \item Aggregation (Zusammenfassung mehrerer Messwerte, Details gehen verloren)
-        \item Sampling
-        \item Diskretisierung / Binarisierung
-        \item Transformation
-        \item Dimensionsreduktion
+        \item Sampling (Random(Behält gleiche Verteilung), Stratified (Einordnung in ähnliche Subgruppen nach Attribut und dann random daraus ziehen))
+        \item Diskretisierung / Binarisierung (Gleiche Breite, gleiche Anzahl, Cluster)
+        \item Transformation (Skalierung etc., PCA?, Kernel?)
+        \item Dimensionsreduktion (Reduzierung und trotzdem Inhalte behalten)
         \item Feature Subset Selection (Konzentration auf wichtige Features)
-        \item Feature Creation
+        \item Feature Creation (W \& H: Algo zusammenhang nicht verstehen, Größe(H*W) geht besser)
     \end{itemize}
 
     \subsection{Ähnlichkeits- und Distanzmaße}
@@ -131,12 +131,15 @@
                 \item $ J = \dfrac{f_{11}}{f_{01}+ f_{10}+ f_{11}} $
                 \item Binäre Daten
                 \item gut für \textbf{asym. Attribute}, da Vorhandensein gewertet wird
+                \item $ 0 <= EJ <= 1$ (1 sehr ähnlich)
+
             \end{itemize}
 
             \textbf{Extended Jaccard Coefficient (Tanimoto):}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $EJ: \dfrac{\langle x, y \rangle}{||x||^2 + ||y||^2 - \langle x,y \rangle}$
                 \item Jaccard für alle Daten
+                \item $ 0 <= EJ <= 1$ (1 sehr ähnlich)
             \end{itemize}
 
             \textbf{Cosine Similarity:}
@@ -151,7 +154,14 @@
             \textbf{Correlation:}
             \begin{itemize}[noitemsep,nolistsep]
                 \item $corr(x,y)$ über Taschenrechner
-                \item zeigt linearen Zusammenhang
+                \item zeigt linearen Zusammenhang ($-1 <= corr <= 1$) 
+                \item Taschenrechner:
+                \begin{itemize}[noitemsep,nolistsep]
+                    \item Menü 6 -> 2 Statistik -> $< = a+bx$
+                    \item Dateneingabe und $AC$ drücken
+                    \item $OPTN$ -> Regression
+                    \item $ r = correlation $
+                \end{itemize}
             \end{itemize}
 
 
@@ -173,7 +183,7 @@
                 Name      & r   & Anwendung                                                                                            \\ \hline
                 Hamming   & 1   & Bin.Vekt. \\ \hline
                 CityBlock & 1   &  nur gerade                                                                                                    \\ \hline
-                Euclid    & 2   &  schräg                                                                                                    \\ \hline
+                Euclid    & 2   &  schräg  (gleiche Skalierung)                                                                                                  \\ \hline
                 Supremum  & $\infty$ &  nur größte Dist.                                                                                                 \\ \hline
                 \end{tabular}
             \end{center}
@@ -281,6 +291,7 @@
                         \item $P$ = Knotenunreinheit des Elternknoten
                         \item $M$ = Split der Kindknoten
                         \item Gain maximieren für einen guten Split bzw. M minimieren!!!
+                        \item \textcolor{red}{InformationGain: } Gain berechnet mit der Entropie!
                     \end{itemize}
             \item \textcolor{red}{Problem: Splits mit vielen Kindsknoten mit wenigen aber einen Datensätze werden bevorzugt!}
             \item SplitInfo

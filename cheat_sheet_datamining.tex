@@ -389,9 +389,17 @@
                     \item Wenn hinzukommender Eintrag falsch klassifiziert wird: Curve geht 1 Schritt nach unten
                     \item Schrittgröße Links  = $\dfrac{1}{Anzahl negativer Einträge}$
                     \item Schrittgröße runter  = $\dfrac{1}{Anzahl positiver Einträge}$
-                    \item Schwellenwert ablesen: Von oben rechts anfangen und zählen und dann immer $>= S_{Punkt}$
-
                 \end{itemize}
+            \item Schwellenwerte ablesen:
+            \begin{itemize}[noitemsep,nolistsep]
+                \item Oben rechts anfangen und abzählen
+                \item Punkt finden und dann $>= S_{Punkt}$
+            \end{itemize}
+            \item Gewichtung ändern:
+            \begin{itemize}[noitemsep,nolistsep]
+                \item FP x-mal schwerer als FN (FPR Achse mal x skalieren)
+                \item FN x-mal schwerer als FN (TPR Achse mal x skalieren)
+            \end{itemize}
         \end{itemize}
 
     \section{Clustering}
